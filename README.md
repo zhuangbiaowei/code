@@ -4,14 +4,20 @@ Douban CODE
 * Website: <http://douban-code.github.io>
 * Guide: <http://douban-code.github.io/pages/getting-started.html>
 
+Dependency
+----------
+- libmemcached <http://douban-code.github.io/pages/python-libmemcached.html>
+- Python 2.7+
+- pip >= 1.4.1
+
 Prepare
 -------
 - mysql # default port
 
 ```
-# import code/databases/schema.sql to database `valentine`
+# import vilya/databases/schema.sql to database `valentine`
 $ mysql -uroot -e 'create database valentine;'
-$ mysql -uroot -D valentine < code/databases/schema.sql
+$ mysql -uroot -D valentine < vilya/databases/schema.sql
 ```
 
 - memcached # default port
@@ -19,19 +25,19 @@ $ mysql -uroot -D valentine < code/databases/schema.sql
 - customize code config
 ```
 # after clone code repo you can change the default config by:
-$ touch CODE_REPO/code/local_config.py
-# overwrite configs defined in code/config.py.
-$ vim CODE_REPO/code/local_config.py
+$ cd {CODE_REPO}
+$ cp vilya/local_config.py.tmpl vilya/local_config.py
+# overwrite configs defined in vilya/config.py.
+$ vim vilya/local_config.py
 ```
 
 Getting started
 ---------------
-
 ```
-git clone https://github.com/douban-code/code.git
+git clone https://github.com/douban/code.git
 cd code
 mysql -uroot -e 'create database valentine;'
-mysql -uroot -D valentine < code/databases/schema.sql
+mysql -uroot -D valentine < vilya/databases/schema.sql
 virtualenv venv
 . venv/bin/activate
 pip install cython  # should install first
@@ -46,10 +52,11 @@ FAQ
 1. single http daemon
  - `gunicorn -b 127.0.0.1:8001 smart_httpd:app` # git http daemon
 
-2. code.config.DOMAIN
+2. vilya.config.DOMAIN
  - if you run 'gunicorn -b IP:PORT app:app', the DOMAIN should be 'http://IP:PORT/'
 
 
 License
 -------
-See the [LICENSE file](https://github.com/douban-code/code/blob/master/LICENSE) for the full license text.
+CODE is under Revised BSD License.
+See the [LICENSE file](https://github.com/douban/code/blob/master/LICENSE) for the full license text.
